@@ -61,3 +61,54 @@ function isValidMoveValue(moveValue) {
     return (moveValue >= 1) && (moveValue <=99);
 }
 
+function getRoundWinner(roundNumber) {
+    switch (roundNumber) {
+        case 1:
+            return getMoveWinner(playerOneMoveOneType, playerOneMoveOneValue, playerTwoMoveOneType, playerTwoMoveOneValue);
+        case 2:
+            return getMoveWinner(playerOneMoveTwoType, playerOneMoveTwoValue, playerTwoMoveTwoType, playerTwoMoveTwoValue);
+        case 3:
+            return getMoveWinner(playerOneMoveThreeType, playerOneMoveThreeValue, playerTwoMoveThreeType, playerTwoMoveThreeValue);
+        default: 
+        return null;
+    };
+
+}
+
+function getMoveWinner (playerOneMoveType, playerOneMoveValue, playerTwoMoveType, playerTwoMoveValue) {
+        if (!playerOneMoveType || !playerOneMoveValue || !playerTwoMoveType || !playerTwoMoveValue) {
+            return null;
+        }
+
+        if (playerOneMoveType === playerTwoMoveType) {
+            if (playerOneMoveValue > playerTwoMoveValue) {
+                return 'Player One';
+            } else if (playerOneMoveValue < playerTwoMoveValue) {
+                return 'Player Two';
+            } else {
+                return 'Tie';
+            }
+        }
+
+        if (playerOneMoveType === 'rock') {
+            if (playerTwoMoveType === 'scissors') {
+                return 'Player One';
+            } else {
+                return 'Player Two';
+            } 
+        } else if (playerOneMoveType === 'paper') {
+            if (playerTwoMoveType === 'rock') {
+                return 'Player One';
+            } else {
+                return 'Player Two';
+            }
+        } else {
+            if (playerTwoMoveType === 'paper') {
+                return 'Player One';
+            } else {
+                return 'Player Two';
+            }
+        }
+
+
+}
